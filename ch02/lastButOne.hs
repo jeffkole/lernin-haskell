@@ -14,3 +14,15 @@ lastButOne'' [] = Nothing
 lastButOne'' xs = if null (tail xs)
                   then Nothing
                   else Just (lastButOne xs)
+
+-- This does not actually work, because the _ at the beginning can only match
+-- a single list element.  It cannot match any size list.
+lastButOne''' :: [a] -> Maybe a
+lastButOne''' (_:x:_:[]) = Just x
+lastButOne''' (x:_:[])   = Just x
+lastButOne''' _          = Nothing
+
+lastButOne'''' :: [a] -> a
+lastButOne'''' []       = error "Not enough elements"
+lastButOne'''' (x:_:[]) = x
+lastButOne'''' xs       = lastButOne'''' (tail xs)
