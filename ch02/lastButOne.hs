@@ -26,3 +26,9 @@ lastButOne'''' :: [a] -> a
 lastButOne'''' []       = error "Not enough elements"
 lastButOne'''' (x:_:[]) = x
 lastButOne'''' xs       = lastButOne'''' (tail xs)
+
+lastButOne''''' :: [a] -> Maybe a
+lastButOne''''' [] = Nothing
+lastButOne''''' xs
+    | null (tail xs) = Nothing
+    | otherwise      = Just (head (drop (length xs - 2) xs))
