@@ -6,21 +6,17 @@
 import System
 import Control.Applicative
 
--- Returns true if y is a multiple of x
-isMultipleOf :: Integral a => a -> a -> Bool
-isMultipleOf 0 _ = False
-isMultipleOf x y = y `mod` x == 0
-
 -- Uses an applicative functor.
 -- Map `isMultipleOf` over 3 and 5 and apply to x (as a list, because the
 -- list is the applicative functor.  This results in a list of Bool (the
 -- result from `isMultipleOf`), on which `or` is then called, because we want
 -- multiples of 3 or of 5.
-isMultiple :: Integral a => a -> Bool
-isMultiple x = or $ isMultipleOf <$> [3, 5] <*> [x]
 
 sumMultiples :: Integral a => [a] -> a
 sumMultiples xs = sum (filter isMultiple xs)
+    where isMultiple x = or $ isMultipleOf <$> [3, 5] <*> [x]
+          isMultipleOf 0 _ = False
+          isMultipleOf x y = y `mod` x == 0
 
 main = do
     (n:ns) <- getArgs
