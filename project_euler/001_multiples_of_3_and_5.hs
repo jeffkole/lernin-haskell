@@ -10,10 +10,13 @@ isMultipleOf :: Integral a => a -> a -> Bool
 isMultipleOf 0 _ = False
 isMultipleOf x y = y `mod` x == 0
 
-isMultiple :: Integral a => a -> Bool
-isMultiple x = isMultipleOf 3 x || isMultipleOf 5 x
+isMultipleOf3 = isMultipleOf 3
+isMultipleOf5 = isMultipleOf 5
 
-sumMultiples :: Integral a => [a] -> a
+isMultiple :: Integer -> Bool
+isMultiple x = isMultipleOf3 x || isMultipleOf5 x
+
+sumMultiples :: [Integer] -> Integer
 sumMultiples xs = sum (filter isMultiple xs)
 
 main = do
